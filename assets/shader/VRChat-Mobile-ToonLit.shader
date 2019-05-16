@@ -1,6 +1,6 @@
 // VRChat Toon shader, based on Unity's Mobile/Diffuse. Copyright (c) 2019 VRChat.
 //Partially derived from "XSToon" (MIT License) - Copyright (c) 2019 thexiexe@gmail.com
-// Vertex 4 lights support added by ACiil.
+// Vertex 4 lights support added by ACiil. Discord ACIIL#4694.
 // Simplified Toon shader.
 // -fully supports only 1 directional light. Other lights can affect it, but it will be per-vertex/SH.
 
