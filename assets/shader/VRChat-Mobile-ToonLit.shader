@@ -48,14 +48,14 @@ Shader "VRChat/Mobile/Toon Lit"
             	SHADOW_COORDS(7)
             };
 
-			// unity's modified version without the lambert tint darkening and with attenuation pass out.
+			// unity's modified Shade4PointLights() version without the lambert tint darkening and with attenuation pass out.
 			// ACiiL
-            float3 softShade4PointLights_Atten (
+            half3 softShade4PointLights_Atten (
                 float4 lightPosX, float4 lightPosY, float4 lightPosZ,
-                float3 lightColor0, float3 lightColor1, float3 lightColor2, float3 lightColor3,
-                float4 lightAttenSq,
+                half3 lightColor0, half3 lightColor1, half3 lightColor2, half3 lightColor3,
+                half4 lightAttenSq,
                 float3 pos,
-                inout float attenVert)
+                inout half attenVert)
             {
                 // to light vectors
                 float4 toLightX = lightPosX - pos.x;
@@ -70,12 +70,12 @@ Shader "VRChat/Mobile/Toon Lit"
                 lengthSq = max(lengthSq, 0.000001);
 
                 // attenuation
-                float4 atten = 1.0 / (1.0 + lengthSq * lightAttenSq);
+                half4 atten = 1.0 / (1.0 + lengthSq * lightAttenSq);
                 attenVert = atten;
                 float4 diff = atten;
 
                 // final color
-                float3 col = 0;
+                half3 col = 0;
                 col += lightColor0 * diff.x;
                 col += lightColor1 * diff.y;
                 col += lightColor2 * diff.z;
@@ -108,7 +108,7 @@ Shader "VRChat/Mobile/Toon Lit"
             	o.direct = lighting;
             	o.indirect = indirectDiffuse.xyzz;
 				half vertexAtten;
-				o.vertexLighting = float4( softShade4PointLights_Atten(
+				o.vertexLighting = half4( softShade4PointLights_Atten(
                     unity_4LightPosX0, unity_4LightPosY0, unity_4LightPosZ0
                     , unity_LightColor[0], unity_LightColor[1], unity_LightColor[2], unity_LightColor[3]
                     , unity_4LightAtten0, o.worldPos, vertexAtten), 1);
