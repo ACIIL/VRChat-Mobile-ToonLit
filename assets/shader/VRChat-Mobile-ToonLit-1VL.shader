@@ -4,7 +4,7 @@
 // Simplified Toon shader.
 // -fully supports only 1 directional light. Other lights can affect it, but it will be per-vertex/SH.
 
-Shader "VRChat/Mobile/Toon Lit 1 vertex light"
+Shader "VRChat/Mobile/ACiiL/Toon Lit 1 vertex light"
 {
 	Properties
 	{	
