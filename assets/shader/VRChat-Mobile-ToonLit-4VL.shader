@@ -4,7 +4,7 @@
 // Simplified Toon shader.
 // -fully supports only 1 directional light. Other lights can affect it, but it will be per-vertex/SH.
 
-Shader "VRChat/Mobile/Toon Lit"
+Shader "VRChat/Mobile/Toon Lit 4 vertex light"
 {
 	Properties
 	{	
@@ -48,14 +48,15 @@ Shader "VRChat/Mobile/Toon Lit"
             	SHADOW_COORDS(7)
             };
 
-			// unity's modified Shade4PointLights() version without the lambert tint darkening and with attenuation pass out.
+			// Unity's modified Shade4PointLights() version without the lambert tint darkening and with attenuation pass out.
+            // Multiply the out attenuation on this return color.
 			// ACiiL
             half3 softShade4PointLights_Atten (
                 float4 lightPosX, float4 lightPosY, float4 lightPosZ,
                 half3 lightColor0, half3 lightColor1, half3 lightColor2, half3 lightColor3,
                 half4 lightAttenSq,
                 float3 pos,
-                inout half attenVert)
+                out half attenVert)
             {
                 // to light vectors
                 float4 toLightX = lightPosX - pos.x;
